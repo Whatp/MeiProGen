@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景圆形 -->
+  <circle cx="20" cy="20" r="20" fill="#4CAF50"/>
+  
+  <!-- 梅花图案 -->
+  <g transform="translate(20, 20)">
+    <!-- 梅花花瓣 -->
+    <circle cx="-6" cy="-2" r="3" fill="white" opacity="0.9"/>
+    <circle cx="6" cy="-2" r="3" fill="white" opacity="0.9"/>
+    <circle cx="-3" cy="4" r="3" fill="white" opacity="0.9"/>
+    <circle cx="3" cy="4" r="3" fill="white" opacity="0.9"/>
+    <circle cx="0" cy="-6" r="3" fill="white" opacity="0.9"/>
+    
+    <!-- 花心 -->
+    <circle cx="0" cy="0" r="2" fill="#FFD700"/>
+    
+    <!-- 中心点 -->
+    <circle cx="0" cy="0" r="1" fill="#FF6B6B"/>
+  </g>
+</svg>

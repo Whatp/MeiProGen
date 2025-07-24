@@ -1,0 +1,15 @@
+@import './base.css';
+
+/* 链接样式 */
+a,
+.green {
+  text-decoration: none;
+  color: #4CAF50;
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: rgba(76, 175, 80, 0.2);
+  }
+}
