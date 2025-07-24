@@ -1,14 +1,32 @@
 <template>
   <div class="preview-panel">
     <div class="preview-header">
-      <h3>{{ viewMode === 'rendered' ? (language === 'zh' ? '效果预览' : 'Preview') : (language === 'zh' ? 'Markdown源码' : 'Markdown Source') }}</h3>
+      <h3>
+        {{
+          viewMode === 'rendered'
+            ? language === 'zh'
+              ? '效果预览'
+              : 'Preview'
+            : language === 'zh'
+            ? 'Markdown源码'
+            : 'Markdown Source'
+        }}
+      </h3>
       <div class="preview-actions">
         <button
           @click="toggleView"
           class="view-toggle-btn"
           :class="{ active: viewMode === 'rendered' }"
         >
-          {{ viewMode === 'raw' ? (language === 'zh' ? '🎨 效果预览' : '🎨 Preview') : (language === 'zh' ? '📄 源码' : '📄 Source') }}
+          {{
+            viewMode === 'raw'
+              ? language === 'zh'
+                ? '🎨 效果预览'
+                : '🎨 Preview'
+              : language === 'zh'
+              ? '📄 源码'
+              : '📄 Source'
+          }}
         </button>
         <button @click="copyToClipboard" class="copy-btn">
           {{ language === 'zh' ? '📋 复制' : '📋 Copy' }}
@@ -57,9 +75,6 @@ function toggleView() {
 marked.setOptions({
   breaks: true,
   gfm: true,
-  sanitize: false,
-  headerIds: true,
-  mangle: false
 })
 
 // 使用marked库进行Markdown到HTML转换
@@ -74,7 +89,7 @@ const renderedHtml = computed(() => {
       .replace(/(<br\s*\/?>[\s]*)(#+)/g, '$1\n$2') // br后的标题前添加换行
       .replace(/(#+[^\n]*?)(<br\s*\/?>)/g, '$1\n$2') // 标题后的br前添加换行
       .replace(/\n{3,}/g, '\n\n') // 去除多余的空行
-    
+
     const html = marked(processedMarkdown)
     return html
   } catch (error) {
@@ -100,7 +115,7 @@ async function copyToClipboard() {
     textArea.select()
     document.execCommand('copy')
     document.body.removeChild(textArea)
-    
+
     showCopySuccess.value = true
     setTimeout(() => {
       showCopySuccess.value = false
@@ -160,13 +175,13 @@ watch(generatedMarkdown, (newMarkdown) => {
 .view-toggle-btn:hover,
 .copy-btn:hover {
   background-color: var(--color-background-soft);
-  border-color: #4CAF50;
+  border-color: #4caf50;
 }
 
 .view-toggle-btn.active {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
-  border-color: #4CAF50;
+  border-color: #4caf50;
 }
 
 .preview-content {
@@ -246,7 +261,7 @@ watch(generatedMarkdown, (newMarkdown) => {
 }
 
 .markdown-content a {
-  color: #4CAF50;
+  color: #4caf50;
   text-decoration: none;
 }
 
@@ -301,7 +316,7 @@ watch(generatedMarkdown, (newMarkdown) => {
 }
 
 /* GitHub风格的div居中 */
-.markdown-content :deep(div[align="center"]) {
+.markdown-content :deep(div[align='center']) {
   text-align: center;
   margin: 1rem 0;
 }
@@ -312,7 +327,7 @@ watch(generatedMarkdown, (newMarkdown) => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 1rem 2rem;
   border-radius: 8px;
@@ -323,11 +338,13 @@ watch(generatedMarkdown, (newMarkdown) => {
 }
 
 @keyframes fadeInOut {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.8);
   }
-  10%, 90% {
+  10%,
+  90% {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
@@ -340,17 +357,17 @@ watch(generatedMarkdown, (newMarkdown) => {
     gap: 1rem;
     align-items: stretch;
   }
-  
+
   .preview-actions {
     justify-content: center;
   }
-  
+
   .view-toggle-btn,
   .copy-btn {
     flex: 1;
     text-align: center;
   }
-  
+
   .raw-markdown pre,
   .markdown-content {
     padding: 1rem;
