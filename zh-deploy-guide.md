@@ -120,6 +120,12 @@ npm run build
    /* /index.html 200
    ```
 
+1. **路由配置**：Vue Router 需要配置为 history 模式时，需要添加 _redirects 文件
+2. 在 `public` 文件夹中创建 `_redirects` 文件，内容如下：
+   ```
+   /* /index.html 200
+   ```
+
 ### 性能优化
 
 为了获得更好的性能，可以考虑：

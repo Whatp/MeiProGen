@@ -47,6 +47,14 @@ npm run lint
 
 For detailed instructions on deploying to Cloudflare Pages, please refer to our [Chinese deployment guide](./zh-deploy-guide.md) which includes comprehensive steps for both GitHub integration and manual deployment methods.
 
+**Important Configuration for Vue Router:**
+To ensure proper routing functionality on Cloudflare Pages, a `_redirects` file has been added to the `public` directory with the following content:
+```
+/* /index.html 200
+```
+
+This configuration is essential for single-page applications using Vue Router's history mode.
+
 - Log in to Cloudflare Pages.
 - Create a new project and connect to GitHub.
 - Configure build settings and deploy.
