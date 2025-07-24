@@ -44,9 +44,18 @@ npm run lint
 - Deploy the project with default settings.
 
 ### Deploying to Cloudflare
+
+For detailed instructions on deploying to Cloudflare Pages, please refer to our [Chinese deployment guide](./zh-deploy-guide.md) which includes comprehensive steps for both GitHub integration and manual deployment methods.
+
 - Log in to Cloudflare Pages.
 - Create a new project and connect to GitHub.
 - Configure build settings and deploy.
+
+#### Version Information
+
+- **v1.0.0**: Initial version with basic deployment steps
+- **v1.1.0**: Added environment variable configuration
+- **v1.2.0**: Enhanced troubleshooting section and performance optimization tips
 
 ## Contribution
 
