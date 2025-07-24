@@ -191,12 +191,63 @@ export default {
 @media (max-width: 768px) {
   /* 头部容器 - 在小屏幕上减少内边距 */
   .header {
-    padding: 1rem;
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* logo容器 - 在小屏幕上居中 */
+  .logo-container {
+    justify-content: center;
   }
 
   /* 网站名称 - 在小屏幕上减小字体大小 */
   .site-name {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  /* 头部操作区域 - 在小屏幕上换行并减少间距 */
+  .header-actions {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* 所有按钮在手机上的调整 */
+  .framed-link {
+    min-width: 80px;
+    height: 36px;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* 更小的屏幕 - 手机端优化 */
+@media (max-width: 480px) {
+  .header {
+    padding: 0.5rem;
+  }
+
+  .logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .site-name {
+    font-size: 1rem;
+  }
+
+  .header-actions {
+    gap: 0.4rem;
+    width: 100%;
+  }
+
+  .framed-link {
+    min-width: 70px;
+    height: 32px;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.75rem;
   }
 }
 </style>

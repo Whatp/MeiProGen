@@ -107,14 +107,37 @@ export default {
 
 /* 响应式设计 - 小屏幕 */
 @media (max-width: 768px) {
+  /* GitHub链接 - 在小屏幕上调整 */
+  .github-link {
+    min-width: 80px;
+    height: 36px;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  /* GitHub文本 - 在小屏幕上显示简化文本 */
+  .github-text {
+    font-size: 0.8rem;
+  }
+}
+
+/* 更小的屏幕 - 手机端优化 */
+@media (max-width: 480px) {
+  .github-link {
+    min-width: 70px;
+    height: 32px;
+    padding: 0.3rem 0.5rem;
+  }
+  
   /* GitHub文本 - 在小屏幕上隐藏文本 */
   .github-text {
     display: none;
   }
   
-  /* GitHub链接 - 在小屏幕上调整内边距 */
-  .github-link {
-    padding: 0.5rem;
+  /* GitHub图标 - SVG调整大小 */
+  .github-icon svg {
+    width: 16px;
+    height: 16px;
   }
 }
 </style>

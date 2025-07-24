@@ -80,14 +80,31 @@ export default {
 
 /* 响应式设计 - 小屏幕 */
 @media (max-width: 768px) {
-  /* 语言文本 - 在小屏幕上隐藏文本 */
-  .language-text {
-    display: none;
+  /* 语言切换按钮 - 在小屏幕上调整 */
+  .language-toggle {
+    min-width: 80px;
+    height: 36px;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
   }
   
-  /* 语言切换按钮 - 在小屏幕上调整内边距 */
+  /* 语言文本 - 在小屏幕上显示简化文本 */
+  .language-text {
+    font-size: 0.8rem;
+  }
+}
+
+/* 更小的屏幕 - 手机端优化 */
+@media (max-width: 480px) {
   .language-toggle {
-    padding: 0.5rem;
+    min-width: 70px;
+    height: 32px;
+    padding: 0.3rem 0.5rem;
+  }
+  
+  /* 语言文本 - 在小屏幕上显示简化文本 */
+  .language-text {
+    font-size: 0.75rem;
   }
 }
 </style>

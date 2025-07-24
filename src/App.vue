@@ -144,7 +144,11 @@ html, body {
   .selection-area,
   .preview-area {
     padding: 1rem;
-    min-height: 35vh;
+    min-height: 45vh; /* 增加高度以便手机上更好地显示 */
+  }
+  
+  .selection-area {
+    margin-right: 0; /* 移除右边距 */
   }
 }
 
@@ -160,8 +164,28 @@ html, body {
   .selection-area,
   .preview-area {
     padding: 0.75rem;
-    min-height: 30vh;
+    min-height: 40vh; /* 调整高度使内容更容易阅读 */
     border-radius: 6px;
+    font-size: 0.9rem; /* 调整字体大小以适应小屏幕 */
+  }
+}
+
+/* 专门为小屏幕手机优化 */
+@media (max-width: 360px) {
+  .main-content {
+    padding: 0.125rem;
+  }
+  
+  .content-area {
+    gap: 0.375rem;
+  }
+  
+  .selection-area,
+  .preview-area {
+    padding: 0.5rem;
+    min-height: 35vh;
+    border-radius: 4px;
+    font-size: 0.85rem;
   }
 }
 
