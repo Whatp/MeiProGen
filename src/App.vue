@@ -43,6 +43,21 @@ html, body {
   overflow: hidden;
 }
 
+/* 移动端优化 */
+@media (max-width: 768px) {
+  html, body {
+    overflow: auto;
+    height: auto;
+    min-height: 100%;
+  }
+  
+  #app {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+}
+
 /* 根容器样式 */
 #app-container {
   display: flex;
@@ -55,6 +70,15 @@ html, body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* 移动端根容器优化 */
+@media (max-width: 768px) {
+  #app-container {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+}
+
 /* 主内容区域 */
 .main-content {
   flex: 1;
@@ -63,6 +87,15 @@ html, body {
   overflow: hidden;
   min-height: 0;
   width: 100%;
+}
+
+/* 移动端主内容区域优化 */
+@media (max-width: 768px) {
+  .main-content {
+    flex: none;
+    overflow: visible;
+    min-height: auto;
+  }
 }
 
 /* 内容区容器 - 水平布局 */
@@ -128,7 +161,8 @@ html, body {
   .preview-area {
     flex: none;
     height: auto;
-    min-height: 40vh;
+    min-height: 50vh;
+    max-height: none;
   }
 }
 
@@ -144,7 +178,10 @@ html, body {
   .selection-area,
   .preview-area {
     padding: 1rem;
-    min-height: 45vh; /* 增加高度以便手机上更好地显示 */
+    min-height: 60vh; /* 增加高度以便手机上更好地显示 */
+    max-height: none;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* iOS平滑滚动 */
   }
   
   .selection-area {
@@ -164,9 +201,12 @@ html, body {
   .selection-area,
   .preview-area {
     padding: 0.75rem;
-    min-height: 40vh; /* 调整高度使内容更容易阅读 */
+    min-height: 70vh; /* 增加高度使内容更容易阅读 */
+    max-height: none;
     border-radius: 6px;
     font-size: 0.9rem; /* 调整字体大小以适应小屏幕 */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -183,9 +223,12 @@ html, body {
   .selection-area,
   .preview-area {
     padding: 0.5rem;
-    min-height: 35vh;
+    min-height: 60vh;
+    max-height: none;
     border-radius: 4px;
     font-size: 0.85rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
