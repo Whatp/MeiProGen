@@ -1,49 +1,121 @@
-# myProGen-vue
+# MeiProGen
 
-A comprehensive Vue 3 application enabling users to dynamically generate GitHub profile README files with customizable blocks.
+<p align="center">
+  <img src="./src/assets/logo.png" alt="MeiProGen Logo" width="120" height="120">
+</p>
 
-## Features
+<h1 align="center">MeiProGen</h1>
+
+<p align="center">
+  <a href="README.md">English</a> | <a href="README-ZH.MD">中文</a>
+</p>
+
+<p align="center">
+  A comprehensive Vue 3 application enabling users to dynamically generate GitHub profile README files with customizable blocks.
+</p>
+
+<p align="center">
+  <a href="https://progen.meilingluo.cn">
+    <img src="https://img.shields.io/website?label=Live%20Demo&url=https%3A%2F%2Fprogen.meilingluo.cn" alt="Live Demo">
+  </a>
+  <a href="https://github.com/whatp/MeiProGen/stargazers">
+    <img src="https://img.shields.io/github/stars/whatp/MeiProGen" alt="GitHub Stars">
+  </a>
+  <a href="https://github.com/whatp/MeiProGen/issues">
+    <img src="https://img.shields.io/github/issues/whatp/MeiProGen" alt="GitHub Issues">
+  </a>
+  <a href="https://github.com/whatp/MeiProGen/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/whatp/MeiProGen" alt="License">
+  </a>
+</p>
+
+## 🌟 Features
+
+- Dynamic GitHub profile README generation
+- Customizable and draggable profile blocks
+- Light and dark theme support
+- Multi-language support (English & Chinese)
+- Real-time preview
+
+## 🚀 Live Demo
+
+Check out the live demo: [progen.meilingluo.cn](https://progen.meilingluo.cn)
+
+## 📁 Project Structure
+
+```
+MeiProGen/
+├── public/
+│   ├── _redirects
+│   └── favicon.ico
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   └── BlockConfigs/
+│   ├── router/
+│   ├── stores/
+│   ├── App.vue
+│   └── main.ts
+├── README.md
+├── README-ZH.MD
+└── package.json
+```
+
+## 🛠️ Tech Stack
+
+- [Vue 3](https://vuejs.org/) - Progressive JavaScript Framework
+- [TypeScript](https://www.typescriptlang.org/) - Typed JavaScript
+- [Pinia](https://pinia.vuejs.org/) - Vue Store
+- [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
+- [Marked](https://marked.js.org/) - Markdown Parser
 
 - Dynamic GitHub profile README generation.
 - Customizable and draggable profile blocks.
 - Light and dark theme support.
 
-## Recommended IDE Setup
+## 🏗️ Installation
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (disable Vetur).
+```bash
+# Clone the repository
+git clone https://github.com/whatp/MeiProGen.git
 
-## Project Setup
+# Navigate to the project directory
+cd MeiProGen
 
-```sh
+# Install dependencies
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+## ▶️ Usage
 
-```sh
+### Development
+
+```bash
+# Start the development server
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### Production
 
-```sh
+```bash
+# Build for production
 npm run build
+
+# Preview the production build
+npm run preview
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## ☁️ Deployment
 
-```sh
-npm run lint
-```
+### Vercel
 
-## Deployment
+1. Sign in to Vercel and create a new project
+2. Link your GitHub repository and configure build settings:
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+3. Deploy the project with default settings
 
-### Deploying to Vercel
-- Sign in to Vercel and create a new project.
-- Link your GitHub repository and configure build settings.
-- Deploy the project with default settings.
-
-### Deploying to Cloudflare
+### Cloudflare Pages
 
 For detailed instructions on deploying to Cloudflare Pages, please refer to our [Chinese deployment guide](./zh-deploy-guide.md) which includes comprehensive steps for both GitHub integration and manual deployment methods.
 
@@ -55,28 +127,51 @@ To ensure proper routing functionality on Cloudflare Pages, a `_redirects` file 
 
 This configuration is essential for single-page applications using Vue Router's history mode.
 
-- Log in to Cloudflare Pages.
-- Create a new project and connect to GitHub.
-- Configure build settings and deploy.
+## 👥 Contributors
 
-#### Version Information
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/whatp">
+        <img src="https://avatars.githubusercontent.com/u/1?v=4" width="100px;" alt=""/>
+        <br />
+        <sub><b>whatp</b></sub>
+      </a>
+      <br />
+      <a href="https://github.com/whatp/MeiProGen/commits?author=whatp" title="Code">💻</a>
+    </td>
+  </tr>
+</table>
 
-- **v1.0.0**: Initial version with basic deployment steps
-- **v1.1.0**: Added environment variable configuration
-- **v1.2.0**: Enhanced troubleshooting section and performance optimization tips
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
-## Contribution
+## 📈 Star History
 
-We welcome contributions! Please:
-- Star the repository.
-- Fork and clone locally.
-- Create issues for bugs or propose new features.
-- Make pull requests to submit changes.
+[![Star History Chart](https://api.star-history.com/svg?repos=whatp/MeiProGen&type=Date)](https://star-history.com/#whatp/MeiProGen&Date)
 
-## License
+## 🤝 Contributing
 
-This project is licensed under the MIT License.
+Contributions are welcome! Here's how you can help:
 
-## Acknowledgments
+1. Star the repository ⭐
+2. Fork and clone locally 🍴
+3. Create issues for bugs or propose new features 🐛
+4. Submit pull requests with your improvements 🎉
 
-Big thanks to all contributors and everyone involved in the Vue.js and GitHub community.
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📚 中文文档
+
+有关中文文档，请参阅 [README-ZH.MD](./README-ZH.MD)。
+
+## 🙏 Acknowledgments
+
+- Thanks to all contributors who have helped improve this project
+- Inspired by the Vue.js and GitHub communities
