@@ -28,11 +28,11 @@ export const useProfileStore = defineStore('profile', () => {
   // 基础profile信息
   const profileInfo = ref<ProfileInfo>({
     name: '梅零落',
-    username: 'meilingluo',
-    title: '前端开发工程师',
-    description: '🌱 持续学习，专注于现代化Web开发技术。热爱开源，分享技术。',
+    username: 'whatp',
+    title: '后端攻城狮',
+    description: '🌱 持续学习，热爱开源，分享技术。',
     location: '北京，中国',
-    website: 'https://meilingluo.com',
+    website: 'https://wordpress.meilingluo.cn',
     email: 'meilingluo@example.com',
     avatar: 'https://avatars.githubusercontent.com/u/1?v=4'
   })
