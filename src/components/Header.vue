@@ -4,10 +4,17 @@ import ThemeToggle from './ThemeToggle.vue'
 import LanguageToggle from './LanguageToggle.vue'
 import GitHubLink from './GitHubLink.vue'
 import { useLanguageStore } from '../stores/language'
+import { useThemeStore } from '../stores/theme'
 import { storeToRefs } from 'pinia'
+// 导入logo资源
+import logoSvg from '@/assets/logo.svg'
+import logoPng from '@/assets/logo.png'
 
 const languageStore = useLanguageStore()
 const { language } = storeToRefs(languageStore)
+
+const themeStore = useThemeStore()
+const { theme } = storeToRefs(themeStore)
 
 const siteTitle = computed(() => {
   return language.value === 'zh' ? '梅零落的Profile生成器' : "MeiLingLuo's Profile Generator"
@@ -15,6 +22,10 @@ const siteTitle = computed(() => {
 
 const navLinkText = computed(() => {
   return language.value === 'zh' ? '梅的导航站' : "MEI's NAV"
+})
+
+const logoSrc = computed(() => {
+  return theme.value === 'dark' ? logoSvg : logoPng
 })
 </script>
 
@@ -27,7 +38,7 @@ export default {
 <template>
   <header class="header">
     <div class="logo-container">
-      <img alt="Logo" class="logo" src="@/assets/logo.svg" />
+      <img alt="Logo" class="logo" :src="logoSrc" />
       <span class="site-name">{{ siteTitle }}</span>
     </div>
     <div class="header-actions">

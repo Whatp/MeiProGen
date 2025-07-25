@@ -39,7 +39,7 @@
         <pre><code>{{ generatedMarkdown || (language === 'zh' ? '请填写基础信息并选择要显示的内容块...' : 'Please fill in the basic information and select the content blocks to display...') }}</code></pre>
       </div>
       <div v-else class="rendered-preview">
-        <div v-html="renderedHtml" class="markdown-content"></div>
+        <div v-html="renderedHtml" class="markdown-content" ref="markdownContent"></div>
       </div>
     </div>
 
@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, nextTick, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { marked } from 'marked'
 import { useProfileStore } from '../stores/profile'
@@ -65,10 +65,64 @@ const { language } = storeToRefs(languageStore)
 // 视图模式：raw(原始) 或 rendered(渲染)
 const viewMode = ref<'raw' | 'rendered'>('rendered')
 const showCopySuccess = ref(false)
+const markdownContent = ref<HTMLElement | null>(null)
 
 // 切换视图模式
 function toggleView() {
   viewMode.value = viewMode.value === 'raw' ? 'rendered' : 'raw'
+}
+
+// 处理图片加载错误
+function handleImageError(event: Event) {
+  const imgElement = event.target as HTMLImageElement
+  // 创建一个包含错误信息的元素
+  const errorDiv = document.createElement('div')
+  errorDiv.innerHTML = `
+    <div style="
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      border-radius: 4px;
+      padding: 1rem;
+      margin: 1rem 0;
+      text-align: center;
+    ">
+      <span>⚠️ Activity graph failed to load</span>
+    </div>
+  `
+  // 替换图片元素
+  if (imgElement.parentElement) {
+    imgElement.parentElement.replaceChild(errorDiv.firstChild!, imgElement)
+  }
+}
+
+// 处理图片加载完成
+function handleImageLoad(event: Event) {
+  const imgElement = event.target as HTMLImageElement
+  // 移除加载状态（如果有的话）
+  const parent = imgElement.parentElement
+  if (parent && parent.classList.contains('image-loading')) {
+    parent.classList.remove('image-loading')
+  }
+}
+
+// 添加图片加载事件监听器
+function addImageListeners() {
+  // 等待DOM更新完成
+  nextTick(() => {
+    if (markdownContent.value) {
+      // 查找所有图片元素
+      const images = markdownContent.value.querySelectorAll('img')
+      images.forEach((img) => {
+        // 添加加载和错误事件监听器
+        img.addEventListener('error', handleImageError)
+        img.addEventListener('load', handleImageLoad)
+      })
+    }
+  })
 }
 
 // 配置marked选项
@@ -84,13 +138,7 @@ const renderedHtml = computed(() => {
   }
 
   try {
-    // 预处理markdown，确保标题前后有空行
-    let processedMarkdown = generatedMarkdown.value
-      .replace(/(<br\s*\/?>[\s]*)(#+)/g, '$1\n$2') // br后的标题前添加换行
-      .replace(/(#+[^\n]*?)(<br\s*\/?>)/g, '$1\n$2') // 标题后的br前添加换行
-      .replace(/\n{3,}/g, '\n\n') // 去除多余的空行
-
-    const html = marked(processedMarkdown)
+    const html = marked(generatedMarkdown.value)
     return html
   } catch (error) {
     console.error('Markdown渲染错误:', error)
@@ -129,6 +177,13 @@ watch(generatedMarkdown, (newMarkdown) => {
     // 可以选择是否自动切换到渲染视图
     // viewMode.value = 'rendered'
   }
+  // 添加图片监听器
+  addImageListeners()
+})
+
+// 在组件挂载时添加图片监听器
+onMounted(() => {
+  addImageListeners()
 })
 </script>
 
@@ -226,6 +281,27 @@ watch(generatedMarkdown, (newMarkdown) => {
   color: var(--color-text);
 }
 
+/* 增加段落间距 */
+.markdown-content p {
+  margin-bottom: 1rem;
+}
+
+/* 增加标题之间的间距 */
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* 第一个标题的上边距为0 */
+.markdown-content :first-child {
+  margin-top: 0;
+}
+
 .markdown-content .empty-state {
   text-align: center;
   color: #888;
@@ -258,6 +334,27 @@ watch(generatedMarkdown, (newMarkdown) => {
 
 .markdown-content p {
   margin: 0.5rem 0;
+}
+
+/* 增加段落间距 */
+.markdown-content p {
+  margin-bottom: 1rem;
+}
+
+/* 增加标题之间的间距 */
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* 第一个标题的上边距为0 */
+.markdown-content :first-child {
+  margin-top: 0;
 }
 
 .markdown-content a {

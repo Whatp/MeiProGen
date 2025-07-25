@@ -25,6 +25,9 @@ export interface ProfileInfo {
 }
 
 export const useProfileStore = defineStore('profile', () => {
+  // 语言存储
+  const languageStore = useLanguageStore()
+  
   // 基础profile信息
   const profileInfo = ref<ProfileInfo>({
     name: '梅零落',
@@ -147,7 +150,7 @@ export const useProfileStore = defineStore('profile', () => {
     console.log('generatedMarkdown computed called')
     console.log('enabledBlocks:', enabledBlocks.value)
     
-    let markdown = ''
+    const blocks: string[] = []
     
     enabledBlocks.value.forEach(block => {
       console.log('Processing block:', block.type, block.enabled)
@@ -178,11 +181,13 @@ export const useProfileStore = defineStore('profile', () => {
       }
       
       console.log('Generated block markdown:', blockMarkdown)
-      markdown += blockMarkdown
-      markdown += '<br /><br />'
+      if (blockMarkdown.trim()) {
+        blocks.push(blockMarkdown.trim())
+      }
     })
     
-    const result = markdown.trim()
+    // 用四换行分隔块，增加模块之间的间距
+    const result = blocks.join('  \n\n<br/><br/>  \n\n')
     console.log('Final generated markdown:', result)
     return result
   })
@@ -226,7 +231,7 @@ export const useProfileStore = defineStore('profile', () => {
   }
 
   function generateAboutMarkdown(block: ProfileBlock): string {
-    return `## 👨‍💻 About Me\n\n${block.config.content || '这里写一些关于你的介绍...'}`
+    return `## 👨‍💻 About Me\n\n${block.config.content || '这里写一些关于你的介绍...'}\n`
   }
 
   function generateStatsMarkdown(block: ProfileBlock): string {
@@ -260,7 +265,7 @@ export const useProfileStore = defineStore('profile', () => {
     let skills = '## 🛠️ Skills & Tools\n\n'
     
     if (block.config.layout === 'badges') {
-      const skillBadges = block.config.skills.map((skill: string) => 
+      const skillBadges = block.config.skills.map((skill: string) =>
         `![${skill}](https://img.shields.io/badge/-${skill}-05122A?style=flat&logo=${skill.toLowerCase().replace('.', '').replace(' ', '')})`
       ).join('\n')
       skills += skillBadges
@@ -268,25 +273,27 @@ export const useProfileStore = defineStore('profile', () => {
       skills += block.config.skills.map((skill: string) => `- ${skill}`).join('\n')
     }
     
-    return skills
+    return skills + '\n'
   }
 
   function generateProjectsMarkdown(block: ProfileBlock): string {
-    let projects = '## 🚀 Featured Projects\n\n'
+    const title = languageStore.language === 'zh' ? '## 🚀 精选项目\n\n' : '## 🚀 Featured Projects\n\n'
+    let projects = title
     
     if (block.config.projects.length === 0) {
-      projects += '<!-- 添加你的项目 -->'
+      projects += languageStore.language === 'zh' ? '<!-- 添加你的项目 -->' : '<!-- Add your projects -->'
     } else {
-      projects += block.config.projects.map((project: any) => 
+      projects += block.config.projects.map((project: any) =>
         `### [${project.name}](${project.url})\n${project.description}\n`
       ).join('\n')
     }
     
-    return projects
+    return projects + '\n'
   }
 
   function generateSocialMarkdown(block: ProfileBlock): string {
-    let social = '## 🤝 Connect with me\n\n'
+    const title = languageStore.language === 'zh' ? '## 🤝 社交媒体\n\n' : '## 🤝 Connect with me\n\n'
+    let social = title
     const platforms = block.config.platforms
     
     const socialLinks = []
@@ -307,29 +314,33 @@ export const useProfileStore = defineStore('profile', () => {
     if (platforms.instagram) socialLinks.push(`[📸 Instagram](https://instagram.com/${platforms.instagram.replace('@', '')})`)
     
     if (socialLinks.length === 0) {
-      social += '暂未添加社交媒体链接...'
+      social += languageStore.language === 'zh' ? '暂未添加社交媒体链接...' : 'No social media links added yet...'
     } else {
       social += '<div align="center">\n\n'
       social += socialLinks.join(' • ')
       social += '\n\n</div>'
     }
     
-    return social
+    return social + '\n'
   }
 
   function generateActivityMarkdown(block: ProfileBlock): string {
     const username = profileInfo.value.username
-    if (!username) return '<!-- 请设置GitHub用户名 -->'
+    if (!username) {
+      return languageStore.language === 'zh' ? '<!-- 请设置GitHub用户名 -->\n' : '<!-- Please set GitHub username -->\n'
+    }
     
-    let activity = '## 📈 Activity\n\n'
+    const title = languageStore.language === 'zh' ? '## 📈 最近活动\n\n' : '## 📈 Activity\n\n'
+    let activity = title
     
     if (block.config.showContributions) {
       activity += `<div align="center">\n`
-      activity += `  <img src="https://github-readme-activity-graph.vercel.app/graph?username=${username}&theme=github-compact&width=600&height=300" alt="Activity Graph" />\n`
+      const errorMsg = languageStore.language === 'zh' ? 'Activity graph failed to load' : 'Activity graph failed to load'
+      activity += `  <img src="https://github-readme-activity-graph.vercel.app/graph?username=${username}&theme=github-compact&width=600&height=300" alt="Activity Graph" onerror="this.onerror=null; this.parentElement.innerHTML='<p>${errorMsg}</p>';" />\n`
       activity += `</div>\n\n`
     }
     
-    return activity
+    return activity + '\n'
   }
 
 
