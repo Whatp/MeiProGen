@@ -122,10 +122,10 @@ export const useProfileStore = defineStore('profile', () => {
     {
       id: 'blog',
       type: 'blog',
-      enabled: false,
+      enabled: true,
       config: {
-        showBlog: false,
-        blogRssUrl: '',
+        showBlog: true,
+        blogRssUrl: 'https://wordpress.meilingluo.cn/feed',
         blogPostCount: '5'
       },
       order: 6
@@ -298,30 +298,34 @@ if (block.config.showVisitorBadge && info.username) {
   }
 
   function generateAboutMarkdown(block: ProfileBlock): string {
-    return `## 👨‍💻 About Me\n\n${block.config.content || '这里写一些关于你的介绍...'}\n`
+    const title = languageStore.language === 'zh' ? '## 👨‍💻 关于我\n\n' : '## 👨‍💻 About Me\n\n'
+    return `${title}${block.config.content || (languageStore.language === 'zh' ? '这里写一些关于你的介绍...' : 'Write something about yourself...')}\n`
   }
 
   function generateStatsMarkdown(block: ProfileBlock): string {
     const username = profileInfo.value.username
-    if (!username) return '<!-- 请设置GitHub用户名 -->'
+    if (!username) {
+      return languageStore.language === 'zh' ? '<!-- 请设置GitHub用户名 -->' : '<!-- Please set GitHub username -->'
+    }
     
-    let stats = '## 📊 GitHub Stats\n\n'
+    const title = languageStore.language === 'zh' ? '## 📊 GitHub统计\n\n' : '## 📊 GitHub Stats\n\n'
+    let stats = title
     
     if (block.config.showOverview) {
       stats += `<div align="center">\n`
-      stats += `  <img src="https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=${block.config.theme}&hide_border=true" alt="GitHub Stats" />\n`
+      stats += `  <img src="https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=${block.config.theme}&hide_border=true" alt="${languageStore.language === 'zh' ? 'GitHub统计' : 'GitHub Stats'}" />\n`
       stats += `</div>\n\n`
     }
     
     if (block.config.showLanguages) {
       stats += `<div align="center">\n`
-      stats += `  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&theme=${block.config.theme}&hide_border=true" alt="Top Languages" />\n`
+      stats += `  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&theme=${block.config.theme}&hide_border=true" alt="${languageStore.language === 'zh' ? '热门语言' : 'Top Languages'}" />\n`
       stats += `</div>\n\n`
     }
     
     if (block.config.showStreak) {
       stats += `<div align="center">\n`
-      stats += `  <img src="https://github-readme-streak-stats.herokuapp.com/?user=${username}&theme=${block.config.theme}&hide_border=true" alt="GitHub Streak" />\n`
+      stats += `  <img src="https://github-readme-streak-stats.herokuapp.com/?user=${username}&theme=${block.config.theme}&hide_border=true" alt="${languageStore.language === 'zh' ? '连续贡献' : 'GitHub Streak'}" />\n`
       stats += `</div>\n\n`
     }
     
@@ -339,27 +343,29 @@ if (block.config.showVisitorBadge && info.username) {
       if (block.config.leetcodeExt) {
         leetcodeUrl += `&ext=${block.config.leetcodeExt}`
       }
-      thirdPartyStats.push(`  <img src="${leetcodeUrl}" alt="LeetCode Stats" />`)
+      thirdPartyStats.push(`  <img src="${leetcodeUrl}" alt="${languageStore.language === 'zh' ? 'LeetCode统计' : 'LeetCode Stats'}" />`)
     }
     
     if (block.config.showZhihu && block.config.zhihuUsername) {
-      thirdPartyStats.push(`  <img src="https://stats.justsong.cn/api/zhihu?username=${block.config.zhihuUsername}" alt="知乎 Stats" />`)
+      thirdPartyStats.push(`  <img src="https://stats.justsong.cn/api/zhihu?username=${block.config.zhihuUsername}" alt="${languageStore.language === 'zh' ? '知乎统计' : 'Zhihu Stats'}" />`)
     }
     
     if (block.config.showBilibili && block.config.bilibiliUid) {
-      thirdPartyStats.push(`  <img src="https://stats.justsong.cn/api/bilibili/?id=${block.config.bilibiliUid}" alt="B站 Stats" />`)
+      thirdPartyStats.push(`  <img src="https://stats.justsong.cn/api/bilibili/?id=${block.config.bilibiliUid}" alt="${languageStore.language === 'zh' ? 'B站统计' : 'Bilibili Stats'}" />`)
     }
     
     if (block.config.showCsdn && block.config.csdnId) {
-      thirdPartyStats.push(`  <img src="https://stats.justsong.cn/api/csdn?id=${block.config.csdnId}" alt="CSDN Stats" />`)
+      thirdPartyStats.push(`  <img src="https://stats.justsong.cn/api/csdn?id=${block.config.csdnId}" alt="${languageStore.language === 'zh' ? 'CSDN统计' : 'CSDN Stats'}" />`)
     }
     
     if (block.config.showNowcoder && block.config.nowcoderId) {
-      thirdPartyStats.push(`  <img src="https://stats.justsong.cn/api/nowcoder?id=${block.config.nowcoderId}" alt="牛客 Stats" />`)
+      thirdPartyStats.push(`  <img src="https://stats.justsong.cn/api/nowcoder?id=${block.config.nowcoderId}" alt="${languageStore.language === 'zh' ? '牛客统计' : 'Nowcoder Stats'}" />`)
     }
     
     if (thirdPartyStats.length > 0) {
-      stats += `### 🌐 第三方平台统计\n\n<div align="center">\n`
+      const thirdPartyTitle = languageStore.language === 'zh' ? '### 🌐 第三方平台统计\n\n' : '### 🌐 Third-Party Platform Stats\n\n'
+      stats += thirdPartyTitle
+      stats += `<div align="center">\n`
       stats += thirdPartyStats.join('\n') + '\n'
       stats += `</div>\n`
     }
@@ -368,7 +374,8 @@ if (block.config.showVisitorBadge && info.username) {
   }
 
   function generateSkillsMarkdown(block: ProfileBlock): string {
-    let skills = '## 🛠️ Skills & Tools\n\n'
+    const title = languageStore.language === 'zh' ? '## 🛠️ 技能 & 工具\n\n' : '## 🛠️ Skills & Tools\n\n'
+    let skills = title
     
     if (block.config.layout === 'badges') {
       const skillBadges = block.config.skills.map((skill: string) =>
@@ -380,7 +387,8 @@ if (block.config.showVisitorBadge && info.username) {
       skills += '<div align="center">\n'
       const skillIcons = block.config.skills.map((skill: string) => {
         const iconName = skill.toLowerCase().replace(/[^a-z0-9]/g, '')
-        return `  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${iconName}/${iconName}-original.svg" alt="${skill}" width="40" height="40"/>`
+        const altText = languageStore.language === 'zh' ? `${skill}技能` : `${skill} skill`
+        return `  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${iconName}/${iconName}-original.svg" alt="${altText}" width="40" height="40"/>`
       }).join('\n')
       skills += skillIcons + '\n</div>'
     } else {
@@ -455,8 +463,21 @@ if (block.config.showVisitorBadge && info.username) {
   }
 
   function generateBlogMarkdown(block: ProfileBlock): string {
+    // 如果博客模块未启用或RSS URL为空，则不显示任何内容
+    if (!block.config.showBlog) {
+      return '';
+    }
+    
     const blogTitle = languageStore.language === 'zh' ? '## 📝 最新博客文章\n\n' : '## 📝 Latest Blog Posts\n\n'
     let blogSection = blogTitle
+    
+    // 如果RSS URL为空，显示提示信息
+    if (!block.config.blogRssUrl) {
+      const prompt = languageStore.language === 'zh' ? 
+        '<!-- 请在博客配置中设置RSS URL -->' : 
+        '<!-- Please set RSS URL in blog configuration -->';
+      return blogTitle + prompt + '\n';
+    }
     
     blogSection += `<!-- BLOG-POST-LIST:START -->\n`
     blogSection += `<!-- 这里会通过GitHub Actions自动更新最新的博客文章 -->\n`
