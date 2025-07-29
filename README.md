@@ -6,6 +6,11 @@
 
 <h1 align="center">MeiProGen</h1>
 
+<!-- Typing Animation -->
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com/?lines=Welcome+to+MeiProGen!;Dynamic+GitHub+Profile+Generator;Customize+Your+README+Now!&font=Fira%20Code&center=true&width=440&height=45&color=f75c7e&vCenter=true&size=22" alt="Typing SVG">
+</p>
+
 <p align="center">
   <a href="README.md">English</a> | <a href="README-ZH.MD">中文</a>
 </p>
@@ -36,6 +41,8 @@
 - Light and dark theme support
 - Multi-language support (English & Chinese)
 - Real-time preview
+- Internationalized Skills & Tools configuration
+- Internationalized Social Media configuration
 
 ## 🚀 Live Demo
 
@@ -126,6 +133,19 @@ To ensure proper routing functionality on Cloudflare Pages, a `_redirects` file 
 ```
 
 This configuration is essential for single-page applications using Vue Router's history mode.
+
+## 📊 GitHub Stats
+
+### GitHub Streak Stats
+<p align="center">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=whatp&theme=tokyonight" alt="GitHub Streak Stats">
+</p>
+
+### Social Stats
+<p align="center">
+  <img src="https://stats.justsong.cn/api/github?username=whatp" alt="GitHub Stats">
+  <img src="https://stats.justsong.cn/api/leetcode?username=whatp" alt="LeetCode Stats">
+</p>
 
 ## 👥 Contributors
 

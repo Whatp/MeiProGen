@@ -1,120 +1,120 @@
 <template>
   <div class="social-config">
-    <h4>🤝 社交媒体配置</h4>
-    
+    <h4>🤝 {{ t.title }}</h4>
+
     <div class="platform-section">
-      <h5>📱 中国社交媒体</h5>
+      <h5>📱 {{ t.chineseSocial }}</h5>
       <div class="form-group">
-        <label for="wechat">微信号:</label>
-        <input 
-          type="text" 
-          id="wechat" 
-          v-model="config.platforms.wechat" 
-          placeholder="your-wechat-id"
+        <label for="wechat">{{ t.wechat }}:</label>
+        <input
+          type="text"
+          id="wechat"
+          v-model="config.platforms.wechat"
+          :placeholder="t.wechatPlaceholder"
           @input="updateConfig"
         />
       </div>
       <div class="form-group">
-        <label for="weibo">微博:</label>
-        <input 
-          type="text" 
-          id="weibo" 
-          v-model="config.platforms.weibo" 
-          placeholder="@your-weibo-name"
+        <label for="weibo">{{ t.weibo }}:</label>
+        <input
+          type="text"
+          id="weibo"
+          v-model="config.platforms.weibo"
+          :placeholder="t.weiboPlaceholder"
           @input="updateConfig"
         />
       </div>
       <div class="form-group">
-        <label for="bilibili">B站:</label>
-        <input 
-          type="text" 
-          id="bilibili" 
-          v-model="config.platforms.bilibili" 
-          placeholder="https://space.bilibili.com/your-uid"
+        <label for="bilibili">{{ t.bilibili }}:</label>
+        <input
+          type="text"
+          id="bilibili"
+          v-model="config.platforms.bilibili"
+          :placeholder="t.bilibiliPlaceholder"
           @input="updateConfig"
         />
       </div>
       <div class="form-group">
-        <label for="zhihu">知乎:</label>
-        <input 
-          type="text" 
-          id="zhihu" 
-          v-model="config.platforms.zhihu" 
-          placeholder="https://www.zhihu.com/people/your-id"
+        <label for="zhihu">{{ t.zhihu }}:</label>
+        <input
+          type="text"
+          id="zhihu"
+          v-model="config.platforms.zhihu"
+          :placeholder="t.zhihuPlaceholder"
           @input="updateConfig"
         />
       </div>
       <div class="form-group">
-        <label for="juejin">掘金:</label>
-        <input 
-          type="text" 
-          id="juejin" 
-          v-model="config.platforms.juejin" 
-          placeholder="https://juejin.cn/user/your-id"
+        <label for="juejin">{{ t.juejin }}:</label>
+        <input
+          type="text"
+          id="juejin"
+          v-model="config.platforms.juejin"
+          :placeholder="t.juejinPlaceholder"
           @input="updateConfig"
         />
       </div>
     </div>
-    
+
     <div class="platform-section">
-      <h5>🌍 国际社交媒体</h5>
+      <h5>🌍 {{ t.internationalSocial }}</h5>
       <div class="form-group">
-        <label for="twitter">Twitter:</label>
-        <input 
-          type="text" 
-          id="twitter" 
-          v-model="config.platforms.twitter" 
-          placeholder="@username"
+        <label for="twitter">{{ t.twitter }}:</label>
+        <input
+          type="text"
+          id="twitter"
+          v-model="config.platforms.twitter"
+          :placeholder="t.twitterPlaceholder"
           @input="updateConfig"
         />
       </div>
       <div class="form-group">
-        <label for="linkedin">LinkedIn:</label>
-        <input 
-          type="url" 
-          id="linkedin" 
-          v-model="config.platforms.linkedin" 
-          placeholder="https://linkedin.com/in/yourprofile"
+        <label for="linkedin">{{ t.linkedin }}:</label>
+        <input
+          type="url"
+          id="linkedin"
+          v-model="config.platforms.linkedin"
+          :placeholder="t.linkedinPlaceholder"
           @input="updateConfig"
         />
       </div>
       <div class="form-group">
-        <label for="github">GitHub:</label>
-        <input 
-          type="text" 
-          id="github" 
-          v-model="config.platforms.github" 
-          placeholder="your-username"
+        <label for="github">{{ t.github }}:</label>
+        <input
+          type="text"
+          id="github"
+          v-model="config.platforms.github"
+          :placeholder="t.githubPlaceholder"
           @input="updateConfig"
         />
       </div>
       <div class="form-group">
-        <label for="discord">Discord:</label>
-        <input 
-          type="text" 
-          id="discord" 
-          v-model="config.platforms.discord" 
-          placeholder="username#1234"
+        <label for="discord">{{ t.discord }}:</label>
+        <input
+          type="text"
+          id="discord"
+          v-model="config.platforms.discord"
+          :placeholder="t.discordPlaceholder"
           @input="updateConfig"
         />
       </div>
       <div class="form-group">
-        <label for="youtube">YouTube:</label>
-        <input 
-          type="url" 
-          id="youtube" 
-          v-model="config.platforms.youtube" 
-          placeholder="https://youtube.com/c/yourchannel"
+        <label for="youtube">{{ t.youtube }}:</label>
+        <input
+          type="url"
+          id="youtube"
+          v-model="config.platforms.youtube"
+          :placeholder="t.youtubePlaceholder"
           @input="updateConfig"
         />
       </div>
       <div class="form-group">
-        <label for="instagram">Instagram:</label>
-        <input 
-          type="text" 
-          id="instagram" 
-          v-model="config.platforms.instagram" 
-          placeholder="@your-username"
+        <label for="instagram">{{ t.instagram }}:</label>
+        <input
+          type="text"
+          id="instagram"
+          v-model="config.platforms.instagram"
+          :placeholder="t.instagramPlaceholder"
           @input="updateConfig"
         />
       </div>
@@ -124,6 +124,9 @@
 
 <script setup lang="ts">
 import type { ProfileBlock } from '../../stores/profile'
+import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useLanguageStore } from '../../stores/language'
 
 const props = defineProps<{
   block: ProfileBlock
@@ -134,6 +137,52 @@ const emit = defineEmits<{
 }>()
 
 const config = props.block.config
+
+// 语言状态
+const languageStore = useLanguageStore()
+const { language } = storeToRefs(languageStore)
+
+// 国际化文本
+const t = computed(() => ({
+  title: language.value === 'zh' ? '社交媒体配置' : 'Social Media Configuration',
+  chineseSocial: language.value === 'zh' ? '中国社交媒体' : 'Chinese Social Media',
+  internationalSocial: language.value === 'zh' ? '国际社交媒体' : 'International Social Media',
+  wechat: language.value === 'zh' ? '微信号' : 'WeChat',
+  weibo: language.value === 'zh' ? '微博' : 'Weibo',
+  bilibili: language.value === 'zh' ? 'B站' : 'Bilibili',
+  zhihu: language.value === 'zh' ? '知乎' : 'Zhihu',
+  juejin: language.value === 'zh' ? '掘金' : 'Juejin',
+  twitter: language.value === 'zh' ? 'Twitter' : 'Twitter',
+  linkedin: language.value === 'zh' ? 'LinkedIn' : 'LinkedIn',
+  github: language.value === 'zh' ? 'GitHub' : 'GitHub',
+  discord: language.value === 'zh' ? 'Discord' : 'Discord',
+  youtube: language.value === 'zh' ? 'YouTube' : 'YouTube',
+  instagram: language.value === 'zh' ? 'Instagram' : 'Instagram',
+  wechatPlaceholder: language.value === 'zh' ? 'your-wechat-id' : 'your-wechat-id',
+  weiboPlaceholder: language.value === 'zh' ? '@your-weibo-name' : '@your-weibo-name',
+  bilibiliPlaceholder:
+    language.value === 'zh'
+      ? 'https://space.bilibili.com/your-uid'
+      : 'https://space.bilibili.com/your-uid',
+  zhihuPlaceholder:
+    language.value === 'zh'
+      ? 'https://www.zhihu.com/people/your-id'
+      : 'https://www.zhihu.com/people/your-id',
+  juejinPlaceholder:
+    language.value === 'zh' ? 'https://juejin.cn/user/your-id' : 'https://juejin.cn/user/your-id',
+  twitterPlaceholder: language.value === 'zh' ? '@username' : '@username',
+  linkedinPlaceholder:
+    language.value === 'zh'
+      ? 'https://linkedin.com/in/yourprofile'
+      : 'https://linkedin.com/in/yourprofile',
+  githubPlaceholder: language.value === 'zh' ? 'your-username' : 'your-username',
+  discordPlaceholder: language.value === 'zh' ? 'username#1234' : 'username#1234',
+  youtubePlaceholder:
+    language.value === 'zh'
+      ? 'https://youtube.com/c/yourchannel'
+      : 'https://youtube.com/c/yourchannel',
+  instagramPlaceholder: language.value === 'zh' ? '@your-username' : '@your-username',
+}))
 
 // 确保所有平台都有默认值
 if (!config.platforms.wechat) config.platforms.wechat = ''
@@ -199,7 +248,7 @@ input {
 
 input:focus {
   outline: none;
-  border-color: #4CAF50;
+  border-color: #4caf50;
 }
 
 input::placeholder {

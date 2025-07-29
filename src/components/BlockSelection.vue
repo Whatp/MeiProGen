@@ -149,6 +149,7 @@ import SkillsConfig from './BlockConfigs/SkillsConfig.vue'
 import ProjectsConfig from './BlockConfigs/ProjectsConfig.vue'
 import SocialConfig from './BlockConfigs/SocialConfig.vue'
 import ActivityConfig from './BlockConfigs/ActivityConfig.vue'
+import BlogConfig from './BlockConfigs/BlogConfig.vue'
 
 const profileStore = useProfileStore()
 const { exportMarkdown: storeExportMarkdown } = profileStore
@@ -194,9 +195,11 @@ const toggleBlock = (blockId: string) => {
 const toggleConfig = (blockId: string) => {
   const index = openConfigs.value.indexOf(blockId)
   if (index > -1) {
+    // 如果已经打开，就关闭它
     openConfigs.value.splice(index, 1)
   } else {
-    openConfigs.value.push(blockId)
+    // 关闭所有其他配置，只打开当前点击的
+    openConfigs.value = [blockId]
   }
 }
 
@@ -217,6 +220,7 @@ const getConfigComponent = (blockType: string) => {
     projects: ProjectsConfig,
     social: SocialConfig,
     activity: ActivityConfig,
+    blog: BlogConfig,
   }
   return components[blockType] || 'div'
 }

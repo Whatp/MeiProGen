@@ -1,23 +1,31 @@
 <template>
   <div class="activity-config">
-    <h4>最近活动 配置</h4>
+    <h4>{{ t.title }}</h4>
     <div class="form-group">
-      <label for="showContributions">显示贡献图</label>
+      <label for="showContributions">{{ t.showContributions }}</label>
       <input type="checkbox" id="showContributions" v-model="config.showContributions" />
-    </div>
-    <div class="form-group">
-      <label for="showRecentRepos">显示最近仓库</label>
-      <input type="checkbox" id="showRecentRepos" v-model="config.showRecentRepos" />
     </div>
   </div>
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useLanguageStore } from '../../stores/language'
+
 const props = defineProps({
   block: Object,
 })
 
 const config = props.block.config
+const languageStore = useLanguageStore()
+const { language } = storeToRefs(languageStore)
+
+// 国际化文本
+const t = computed(() => ({
+  title: language.value === 'zh' ? '最近活动 配置' : 'Activity Configuration',
+  showContributions: language.value === 'zh' ? '显示贡献图' : 'Show Contributions Graph',
+}))
 </script>
 
 <style scoped>

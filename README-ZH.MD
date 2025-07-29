@@ -6,6 +6,11 @@
 
 <h1 align="center">MeiProGen</h1>
 
+<!-- 打字特效 -->
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com/?lines=欢迎来到+MeiProGen!;动态+GitHub+个人资料生成器;立即自定义您的+README!&font=Fira%20Code&center=true&width=440&height=45&color=f75c7e&vCenter=true&size=22" alt="打字特效">
+</p>
+
 <p align="center">
   <a href="README.md">English</a> | <a href="README-ZH.MD">中文</a>
 </p>

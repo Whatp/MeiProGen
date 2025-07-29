@@ -1,12 +1,12 @@
 <template>
   <div class="about-config">
-    <h4>关于我 配置</h4>
+    <h4>{{ t.title }}</h4>
     <div class="form-group">
-      <label for="aboutContent">内容:</label>
+      <label for="aboutContent">{{ t.content }}:</label>
       <textarea 
         id="aboutContent" 
         v-model="config.content" 
-        placeholder="写一些关于你的介绍..."
+        :placeholder="t.placeholder"
         rows="4"
       ></textarea>
     </div>
@@ -14,11 +14,24 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useLanguageStore } from '../../stores/language'
+
 const props = defineProps({
   block: Object,
 })
 
 const config = props.block.config
+const languageStore = useLanguageStore()
+const { language } = storeToRefs(languageStore)
+
+// 国际化文本
+const t = computed(() => ({
+  title: language.value === 'zh' ? '关于我 配置' : 'About Me Configuration',
+  content: language.value === 'zh' ? '内容' : 'Content',
+  placeholder: language.value === 'zh' ? '写一些关于你的介绍...' : 'Write something about yourself...'
+}))
 </script>
 
 <style scoped>
