@@ -157,7 +157,7 @@ This configuration is essential for single-page applications using Vue Router's 
 
 ## 📈 Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=whatp/MeiProGen&type=Date)](https://star-history.com/#whatp/MeiProGen&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=whatp/MeiProGen,whatp/meiprogen&type=Date)](https://www.star-history.com/#whatp/MeiProGen&whatp/meiprogen&Date)
 
 ## 🤝 Contributing
 
