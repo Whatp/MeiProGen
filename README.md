@@ -41,6 +41,11 @@
 
 Check out the live demo: [progen.meilingluo.cn](https://progen.meilingluo.cn)
 
+## Preview
+<img width="1692" height="926" alt="35da2e7ec4ff06cbad24537bda14818a" src="https://github.com/user-attachments/assets/dba46951-03af-4fe6-983e-ceb6243642cb" />
+<img width="1820" height="1209" alt="90503672-03ae-49f0-9797-fd4d31bfd285" src="https://github.com/user-attachments/assets/e215e8d8-c437-4110-8123-6141ee8b21f7" />
+
+
 ## 📁 Project Structure
 
 ```
